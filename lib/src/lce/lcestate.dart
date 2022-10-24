@@ -1,9 +1,9 @@
-part "./content.dart";
-part "./error.dart";
-part "./loading.dart";
-part "./terminated.dart";
+part './content.dart';
+part './error.dart';
+part './loading.dart';
+part './terminated.dart';
 
-/// State for "Loading-Content-Error" resource which retrieves [DATA]
+/// State for 'Loading-Content-Error' resource which retrieves [DATA]
 abstract class LceState<DATA extends Object> {
   /// State data
   abstract final DATA? data;
@@ -30,7 +30,7 @@ abstract class LceState<DATA extends Object> {
   /// [data] State data
   /// [dataIsValid] Data validity at the time of emission
   /// [error] Error occurred
-  const factory LceState.error(DATA data, bool dataIsValid, Exception error) = Error;
+  const factory LceState.error(DATA? data, bool dataIsValid, Exception error) = Error;
 
   /// Creates a terminating state that signals emission finish
   const factory LceState.terminated() = Terminated;
@@ -45,10 +45,23 @@ abstract class LceState<DATA extends Object> {
     return Error(data, dataIsValid, error);
   }
 
+  /// Emulates sealed class with every state callback required except
+  /// [terminated]. Override it if you expect termination or leave empty
+  /// to throw exception
   T when<T extends Object>({
     required T Function(Loading<DATA> state) loading,
     required T Function(Content<DATA> state) content,
     required T Function(Error<DATA> state) error,
     T Function()? terminated
+  });
+
+  /// Emulates sealed class with only one [onElse] callback required.
+  /// Every unset callback will be routed to [onElse] case.
+  T whenElse<T extends Object>({
+    T Function(Loading<DATA> state)? loading,
+    T Function(Content<DATA> state)? content,
+    T Function(Error<DATA> state)? error,
+    T Function()? terminated,
+    required T Function(LceState<DATA> state) onElse
   });
 }

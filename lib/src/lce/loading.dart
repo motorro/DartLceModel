@@ -1,4 +1,4 @@
-part of "./lcestate.dart";
+part of './lcestate.dart';
 
 /// [DATA] is loading
 /// [data] is the current data if any
@@ -50,6 +50,17 @@ class Loading<DATA extends Object> extends LceState<DATA> {
     T Function()? terminated
   }) {
     return loading(this);
+  }
+
+  @override
+  T whenElse<T extends Object>({
+    T Function(Loading<DATA> state)? loading,
+    T Function(Content<DATA> state)? content,
+    T Function(Error<DATA> state)? error,
+    T Function()? terminated,
+    required T Function(LceState<DATA> state) onElse
+  }) {
+    return loading?.call(this) ?? onElse(this);
   }
 }
 
