@@ -1,39 +1,16 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# RxLceModel
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+A reactive data loading for Dart platform to load data and report an
+operation state (`Loading`/`Content`/`Error`).
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+**WORK IN PROGRESS**. Refer to [Android library docs](https://github.com/motorro/RxLceModel) to get an overview
 
 ## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+- Widely used design with `Loading`/`Content`/`Error` states
+- Uses cache as a 'source of truth' with [CacheThenNetLceModel](#cachethennetlcemodel).
+- Checks data is valid (up-to-date or whatever).
+- Falls back to invalid cache data if failed to refresh which allows offline application use.
+- Supports data _refresh_ or _update_ to implement reload or server data update operations.
+- Cache may be _invalidated_ separately from loading to allow lazy data updates and complex data linking.
+- Extendable architecture on every level.
+- Thoroughly tested.
