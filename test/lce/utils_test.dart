@@ -61,12 +61,12 @@ void main() {
 
     test('loading and terminated result in terminated', () {
       final state1 = LceState.loading(1, false);
-      final state2 = LceState<int>.terminated();
+      final state2 = LceState.terminated;
       final state3 = state1.combine<int, int>(state2, (d1, d2) => null);
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<Terminated>()
       );
     });
 
@@ -161,12 +161,12 @@ void main() {
 
     test('content and terminated result in terminated', () {
       final state1 = LceState.content(1, true);
-      final state2 = LceState<int>.terminated();
+      final state2 = LceState.terminated;
       final state3 = state1.combine<int, int>(state2, (d1, d2) => null);
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<Terminated>()
       );
     });
 
@@ -246,57 +246,57 @@ void main() {
     test('error and terminated result in terminated', () {
       final error = StdinException("error");
       final state1 = LceState.error(1, false, error);
-      final state2 = LceState<int>.terminated();
+      final state2 = LceState.terminated;
       final state3 = state1.combine<int, int>(state2, (d1, d2) => null);
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<Terminated>()
       );
     });
 
     test('terminated and loading result in terminated', () {
-      final state1 = LceState.terminated();
+      final state1 = LceState.terminated;
       final state2 = LceState<int>.loading(null, false);
       final state3 = state1.combine<int, int>(state2, (d1, d2) => null);
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<Terminated>()
       );
     });
 
     test('terminated and content result in terminated', () {
-      final state1 = LceState.terminated();
+      final state1 = LceState.terminated;
       final state2 = LceState.content(1, true);
       final state3 = state1.combine<int, int>(state2, (d1, d2) => null);
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<Terminated>()
       );
     });
 
     test('terminated and error result in terminated', () {
       final error = StdinException("error");
-      final state1 = LceState.terminated();
+      final state1 = LceState.terminated;
       final state2 = LceState.error(1, false, error);
       final state3 = state1.combine<int, int>(state2, (d1, d2) => null);
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<Terminated>()
       );
     });
 
     test('terminated and terminated result in terminated', () {
-      final state1 = LceState<int>.terminated();
-      final state2 = LceState<int>.terminated();
+      final state1 = LceState.terminated;
+      final state2 = LceState.terminated;
       final state3 = state1.combine<int, int>(state2, (d1, d2) => null);
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<Terminated>()
       );
     });
   });
@@ -345,7 +345,7 @@ void main() {
     });
 
     test('substitutes termination', () {
-      final original = LceState<int>.terminated();
+      final LceState<int> original = LceState.terminated;
       final substitute = LceState.content(10, true);
       expect(
           original.mapEmptyData((state) => substitute),
@@ -394,11 +394,11 @@ void main() {
     });
 
     test('substitutes termination item', () {
-      final original = LceState<int>.terminated();
+      final LceState<int> original = LceState.terminated;
       final substitute = 10;
       expect(
           original.mapEmptyDataItem(() => substitute),
-          equals(LceState<int>.terminated())
+          equals(LceState.terminated)
       );
     });
 

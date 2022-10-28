@@ -32,8 +32,8 @@ abstract class LceState<DATA extends Object> {
   /// [error] Error occurred
   const factory LceState.error(DATA? data, bool dataIsValid, Exception error) = Error;
 
-  /// Creates a terminating state that signals emission finish
-  const factory LceState.terminated() = Terminated;
+  /// Terminating state that signals emission finish
+  static const terminated = Terminated.instance;
 
   /// Transfers to [Loading] state with loading [type] preserving data
   Loading<DATA> toLoading([ LoadingType type = LoadingType.loading ]) {
@@ -48,7 +48,7 @@ abstract class LceState<DATA extends Object> {
   /// Emulates sealed class with every state callback required except
   /// [terminated]. Override it if you expect termination or leave empty
   /// to throw exception
-  T when<T extends Object>({
+  T when<T>({
     required T Function(Loading<DATA> state) loading,
     required T Function(Content<DATA> state) content,
     required T Function(Error<DATA> state) error,
@@ -57,7 +57,7 @@ abstract class LceState<DATA extends Object> {
 
   /// Emulates sealed class with only one [onElse] callback required.
   /// Every unset callback will be routed to [onElse] case.
-  T whenElse<T extends Object>({
+  T whenElse<T>({
     T Function(Loading<DATA> state)? loading,
     T Function(Content<DATA> state)? content,
     T Function(Error<DATA> state)? error,

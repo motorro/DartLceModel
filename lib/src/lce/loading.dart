@@ -43,7 +43,7 @@ class Loading<DATA extends Object> extends LceState<DATA> {
   }
 
   @override
-  T when<T extends Object>({
+  T when<T>({
     required T Function(Loading<DATA> state) loading,
     required T Function(Content<DATA> state) content,
     required T Function(Error<DATA> state) error,
@@ -53,14 +53,14 @@ class Loading<DATA extends Object> extends LceState<DATA> {
   }
 
   @override
-  T whenElse<T extends Object>({
+  T whenElse<T>({
     T Function(Loading<DATA> state)? loading,
     T Function(Content<DATA> state)? content,
     T Function(Error<DATA> state)? error,
     T Function()? terminated,
     required T Function(LceState<DATA> state) onElse
   }) {
-    return loading?.call(this) ?? onElse(this);
+    return (null != loading) ? loading(this) : onElse(this);
   }
 }
 
