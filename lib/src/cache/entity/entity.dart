@@ -16,6 +16,9 @@ abstract class Entity<T extends Object> implements EntityValidator {
   /// Crates a snapshot of validator preserving it's current [EntityValidator.isValid] value
   @override
   Entity<T> createSnapshot();
+
+  /// Creates an invalid entity out of this one
+  Entity<T> invalidate();
 }
 
 /// [Entity] implementation
@@ -49,6 +52,11 @@ class EntityImpl<T extends Object> with EntityValidatorMixin implements Entity<T
   @override
   Entity<T> createSnapshot() {
     return copyWith(validator: validator.createSnapshot());
+  }
+
+  @override
+  Entity<T> invalidate() {
+    return copyWith(validator: NeverValid.instance);
   }
 
   @override
