@@ -5,7 +5,9 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../utils.dart';
-@GenerateNiceMocks([MockSpec<Clock>()])
+@GenerateNiceMocks([
+  MockSpec<Clock>()
+])
 import 'entity_test.mocks.dart';
 
 void main() {

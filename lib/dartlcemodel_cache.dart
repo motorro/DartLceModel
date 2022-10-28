@@ -1,4 +1,9 @@
 /// Cache tools for LCE model
+export 'src/cache/cacheDelegate.dart' show CacheDelegate;
+export 'src/cache/cacheFriend.dart' show CacheFriend;
+export 'src/cache/cacheFriendDelegate.dart' show DataWithCacheKey;
+export 'src/cache/cacheFriendDelegate.dart' show CacheFriendDelegate;
+export 'src/cache/cacheFriendDelegate.dart' show CacheFriendExtension;
 export 'src/cache/entity/always.dart' show AlwaysValid;
 export 'src/cache/entity/entity.dart' show Entity;
 export 'src/cache/entity/entity.dart' show EntityImpl;

@@ -50,5 +50,21 @@ class EntityImpl<T extends Object> with EntityValidatorMixin implements Entity<T
   Entity<T> createSnapshot() {
     return copyWith(validator: validator.createSnapshot());
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EntityImpl &&
+          runtimeType == other.runtimeType &&
+          data == other.data &&
+          validator == other.validator;
+
+  @override
+  int get hashCode => data.hashCode ^ validator.hashCode;
+
+  @override
+  String toString() {
+    return 'EntityImpl{data: $data, validator: $validator}';
+  }
 }
 
