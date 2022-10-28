@@ -12,6 +12,8 @@ export 'src/cache/entity/entityValidator.dart' show EntityValidator;
 export 'src/cache/entity/entityValidator.dart' show EntityValidator;
 export 'src/cache/entity/entityValidator.dart' show EntityValidatorDeserializer;
 export 'src/cache/entity/entityValidator.dart' show EntityValidatorMixin;
+export 'src/cache/entity/entityValidatorFactory.dart' show EntityValidatorFactory;
+export 'src/cache/entity/entityValidatorFactory.dart' show LifespanValidatorFactory;
 export 'src/cache/entity/lifespan.dart' show Lifespan;
 export 'src/cache/entity/never.dart' show NeverValid;
 export 'src/cache/entity/simple.dart' show Simple;
