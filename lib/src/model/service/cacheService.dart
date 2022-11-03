@@ -14,7 +14,8 @@ abstract class CacheService<D extends Object, P extends Object> {
   /// [delegate] Delegate that synchronously performs caching actions
   factory CacheService.withSyncDelegate(CacheDelegate<D, P> delegate) = SyncDelegateCacheService;
 
-  /// Subscribes to cache data updates
+  /// Subscribes to cache data updates.
+  /// Cache update listeners with new cached values.
   /// [params] Params to notify of changes
   Stream<Entity<D>?> getData(P params);
 
