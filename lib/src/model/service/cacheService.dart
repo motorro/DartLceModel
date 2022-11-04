@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 
+import './asyncDelegateCacheService.dart';
 import './syncDelegateCacheService.dart';
 
 /// Interface to cache an [Entity] locally
@@ -10,9 +11,13 @@ import './syncDelegateCacheService.dart';
 /// [P] Params that identify data type
 abstract class CacheService<D extends Object, P extends Object> {
 
-  /// Creates a [CacheDelegate] cache service
+  /// Creates a [SyncCacheDelegate] cache service
   /// [delegate] Delegate that synchronously performs caching actions
-  factory CacheService.withSyncDelegate(CacheDelegate<D, P> delegate) = SyncDelegateCacheService;
+  factory CacheService.withSyncDelegate(SyncCacheDelegate<D, P> delegate) = SyncDelegateCacheService;
+
+  /// Creates a [AsyncCacheDelegate] cache service
+  /// [delegate] Delegate that synchronously performs caching actions
+  factory CacheService.withAsyncDelegate(AsyncCacheDelegate<D, P> delegate) = AsyncDelegateCacheService;
 
   /// Subscribes to cache data updates.
   /// Cache update listeners with new cached values.

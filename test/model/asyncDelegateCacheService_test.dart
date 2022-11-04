@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 import 'package:dartlcemodel/dartlcemodel_model.dart';
-import 'package:dartlcemodel/src/model/service/syncDelegateCacheService.dart';
+import 'package:dartlcemodel/src/model/service/asyncDelegateCacheService.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -10,30 +10,30 @@ import 'package:test/test.dart';
 
 import '../utils.dart';
 @GenerateNiceMocks([
-  MockSpec<SyncCacheDelegate<String, String>>()
+  MockSpec<AsyncCacheDelegate<String, String>>()
 ])
-import 'syncDelegateCacheService_test.mocks.dart';
+import 'asyncDelegateCacheService_test.mocks.dart';
 
 
 void main() {
   final params1 = "params1";
   final validEntity = Entity.create("data", AlwaysValid.instance);
 
-  late MockSyncCacheDelegate cacheDelegate;
+  late MockAsyncCacheDelegate cacheDelegate;
   late CacheService<String, String> service;
 
   setUp(() {
-    cacheDelegate = MockSyncCacheDelegate();
-    service = SyncDelegateCacheService(cacheDelegate);
+    cacheDelegate = MockAsyncCacheDelegate();
+    service = AsyncDelegateCacheService(cacheDelegate);
   });
 
-  group('SyncDelegateCacheService', () {
+  group('AsyncDelegateCacheService', () {
     test('gets nothing from delegate', () {
       expect(service.getData(params1).first, completion(isNull));
     });
 
     test('gets stored from delegate', () {
-      when(cacheDelegate.get(any)).thenReturn(validEntity);
+      when(cacheDelegate.get(any)).thenAnswer((_) => Future.value(validEntity));
 
       expect(service.getData(params1).first, completion(equals(validEntity)));
     });

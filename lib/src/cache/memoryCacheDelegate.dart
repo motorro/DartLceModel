@@ -3,7 +3,7 @@ import 'package:dartlcemodel/dartlcemodel_cache.dart';
 /// A simple memory cache for cache-service
 /// [D] Data type
 /// [P] Params type
-class MemoryCacheDelegate<D extends Object, P extends Object> implements CacheDelegate<D, P> {
+class MemoryCacheDelegate<D extends Object, P extends Object> implements SyncCacheDelegate<D, P> {
   final MemoryDelegateCache<Entity<D>, P> _cache;
 
   const MemoryCacheDelegate._private(this._cache);

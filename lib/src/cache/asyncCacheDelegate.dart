@@ -1,24 +1,24 @@
 import '../../dartlcemodel_cache.dart';
 
-/// Delegate that synchronously performs caching operations
-abstract class CacheDelegate<D extends Object, P extends Object> {
+/// Delegate that asynchronously performs caching operations
+abstract class AsyncCacheDelegate<D extends Object, P extends Object> {
   /// Returns data if cached
   /// [params] Caching key
-  Entity<D>? get(P params);
+  Future<Entity<D>?> get(P params);
 
   /// Saves data to cache
   /// [params] Caching key
   /// [entity] Entity to cache
-  void save(P params, Entity<D> entity);
+  Future<void> save(P params, Entity<D> entity);
 
   /// Invalidates cached value
   /// [params] Caching key
-  void invalidate(P params);
+  Future<void> invalidate(P params);
 
   /// Invalidates all cached values
-  void invalidateAll();
+  Future<void> invalidateAll();
 
   /// Deletes cached value
   /// [params] Caching key
-  void delete(P params);
+  Future<void> delete(P params);
 }

@@ -1,17 +1,17 @@
 import '../../dartlcemodel_cache.dart';
 
-/// [CacheDelegate] with string params extensions
-extension StringKeyExtension<D extends Object> on CacheDelegate<D, String> {
+/// [SyncCacheDelegate] with string params extensions
+extension StringKeyExtension<D extends Object> on SyncCacheDelegate<D, String> {
   /// Creates an adapter delegate that creates [CacheFriend] params using [stringify] function
   /// Receiver - Delegate with [CacheFriend] params e.g. the one that saves data to files and uses params as file names
-  CacheDelegate<D, P> stringifyParams<P extends Object>([ String Function(P params)? stringify ]) {
+  SyncCacheDelegate<D, P> stringifyParams<P extends Object>([ String Function(P params)? stringify ]) {
     return _StringAdapter(this, stringify ?? (p) => p.toString());
   }
 }
 
 // String delegate adapter
-class _StringAdapter<D extends Object, P extends Object> implements CacheDelegate<D, P> {
-  final CacheDelegate<D, String> _delegate;
+class _StringAdapter<D extends Object, P extends Object> implements SyncCacheDelegate<D, P> {
+  final SyncCacheDelegate<D, String> _delegate;
   final String Function(P params) _stringify;
 
   /// Constructor

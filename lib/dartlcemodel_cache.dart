@@ -1,9 +1,11 @@
 /// Cache tools for LCE model
-export 'src/cache/cacheDelegate.dart' show CacheDelegate;
+export 'src/cache/asyncCacheDelegate.dart' show AsyncCacheDelegate;
 export 'src/cache/cacheFriend.dart' show CacheFriend;
 export 'src/cache/cacheFriendDelegate.dart' show DataWithCacheKey;
-export 'src/cache/cacheFriendDelegate.dart' show CacheFriendDelegate;
-export 'src/cache/cacheFriendDelegate.dart' show CacheFriendExtension;
+export 'src/cache/cacheFriendDelegate.dart' show SyncCacheFriendDelegate;
+export 'src/cache/cacheFriendDelegate.dart' show SyncCacheFriendExtension;
+export 'src/cache/cacheFriendDelegate.dart' show AsyncCacheFriendDelegate;
+export 'src/cache/cacheFriendDelegate.dart' show AsyncCacheFriendExtension;
 export 'src/cache/cacheManager.dart' show CacheManager;
 export 'src/cache/entity/always.dart' show AlwaysValid;
 export 'src/cache/entity/entity.dart' show Entity;
@@ -18,4 +20,5 @@ export 'src/cache/entity/never.dart' show NeverValid;
 export 'src/cache/entity/simple.dart' show Simple;
 export 'src/cache/memoryCacheDelegate.dart' show MemoryCacheDelegate;
 export 'src/cache/memoryCacheDelegate.dart' show MemoryDelegateCache;
+export 'src/cache/syncCacheDelegate.dart' show SyncCacheDelegate;
 export 'src/cache/utils.dart' show StringKeyExtension;

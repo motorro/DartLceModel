@@ -12,7 +12,7 @@ import 'memoryCacheDelegate_test.mocks.dart';
 
 void main() {
   late Clock clock;
-  late CacheDelegate<String, int> delegate;
+  late SyncCacheDelegate<String, int> delegate;
 
   setUp(() {
     clock = MockClock();
