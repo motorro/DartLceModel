@@ -31,7 +31,7 @@ extension LceStateUtils<DATA_1 extends Object> on LceState<DATA_1> {
             state.dataIsValid,
             state.error
         ),
-        terminated: () => LceState.terminated
+        terminated: () => LceState.terminated()
     );
   }
 
@@ -53,7 +53,7 @@ extension LceStateUtils<DATA_1 extends Object> on LceState<DATA_1> {
         loading: (state) => LceState.loading(block(), state.dataIsValid, state.type),
         content: (state) => LceState.content(block(), state.dataIsValid),
         error: (state) => LceState.error(block(), state.dataIsValid, state.error),
-        terminated: () => LceState.terminated
+        terminated: () => LceState.terminated()
       );
     }
   }
@@ -93,22 +93,22 @@ extension LceStateUtils<DATA_1 extends Object> on LceState<DATA_1> {
     return when(
         loading: (state) => other.whenElse(
             error: (state2) => LceState.error(data3, isValid, state2.error),
-            terminated: () => LceState.terminated,
+            terminated: () => LceState.terminated(),
             onElse: (state2) => LceState.loading(data3, isValid, state.type)
         ),
         content: (state) => other.when(
             error: (state2) => LceState.error(data3, isValid, state2.error),
-            terminated: () => LceState.terminated,
+            terminated: () => LceState.terminated(),
             loading: (state2) => LceState.loading(data3, isValid, state2.type),
             content: (state2) => null == data3
                 ? const LceState.loading(null, false)
                 : LceState.content(data3, isValid)
         ),
         error: (state) => other.whenElse(
-            terminated: () => LceState.terminated,
+            terminated: () => LceState.terminated(),
             onElse: (state2) => LceState.error(data3, isValid, state.error)
         ),
-        terminated: () => LceState.terminated
+        terminated: () => LceState.terminated()
     );
   }
 }

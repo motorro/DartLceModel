@@ -9,23 +9,22 @@ part of './lcestate.dart';
 /// Also useful when `onComplete` from state-emitter can't be processed by the end-subscriber. For example LiveData
 /// does not emit completion and caches the latest emission. So converting stream to LiveData will loose Rx completion
 /// logic.
-class Terminated extends LceState<Never> {
+class Terminated<DATA extends Object> extends LceState<DATA> {
   @override
-  // ignore: prefer_void_to_null
-  final Never? data = null;
-
-  /// [Terminated] instance
-  static const instance = Terminated._private();
+  final DATA? data = null;
 
   /// Flow terminated state
-  const Terminated._private() : super._internal(false);
+  const Terminated() : super._internal(false);
 
   @override
 
-  bool operator ==(Object other) => identical(this, other);
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Terminated &&
+              runtimeType == other.runtimeType;
 
   @override
-  int get hashCode => 0.hashCode;
+  int get hashCode => 0;
 
   @override
   String toString() {
@@ -33,10 +32,10 @@ class Terminated extends LceState<Never> {
   }
 
   @override
-  T when<T>({
-    required T Function(Loading<Never> state) loading,
-    required T Function(Content<Never> state) content,
-    required T Function(Error<Never> state) error,
+  T when<T extends Object>({
+    required T Function(Loading<DATA> state) loading,
+    required T Function(Content<DATA> state) content,
+    required T Function(Error<DATA> state) error,
     T Function()? terminated
   }) {
     if (null == terminated) {
@@ -46,13 +45,13 @@ class Terminated extends LceState<Never> {
   }
 
   @override
-  T whenElse<T>({
-    T Function(Loading<Never> state)? loading,
-    T Function(Content<Never> state)? content,
-    T Function(Error<Never> state)? error,
+  T whenElse<T extends Object>({
+    T Function(Loading<DATA> state)? loading,
+    T Function(Content<DATA> state)? content,
+    T Function(Error<DATA> state)? error,
     T Function()? terminated,
-    required T Function(LceState<Never> state) onElse
+    required T Function(LceState<DATA> state) onElse
   }) {
-    return (null != terminated) ? terminated() : onElse(this);
+    return terminated?.call() ?? onElse(this);
   }
 }
