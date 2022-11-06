@@ -1,4 +1,9 @@
-import '../../dartlcemodel_cache.dart';
+
+import 'package:dartlcemodel/src/cache/entity/entity.dart';
+import 'package:dartlcemodel/src/cache/syncCacheDelegate.dart';
+
+import 'asyncCacheDelegate.dart';
+import 'cacheFriend.dart';
 
 /// Data combined with full cached key to validate we get exactly what we are looking for
 /// For example, DiskLruCache has strict requirements and limited length of a cache key and
@@ -30,7 +35,7 @@ class DataWithCacheKey<D extends Object> {
   }
 }
 
-/// Wraps [delegate] adding unmodified [CacheFriend.cacheKey] to the mix with data.
+/// Wraps [delegateFactory] adding unmodified [CacheFriend.cacheKey] to the mix with data.
 /// Validates that key on [get] and returns null if it is not equals original.
 /// Helps to make sure the data returned is not a result of clashed cache key.
 class SyncCacheFriendDelegate<D extends Object, P extends CacheFriend> implements SyncCacheDelegate<D, P> {
@@ -74,7 +79,7 @@ class SyncCacheFriendDelegate<D extends Object, P extends CacheFriend> implement
   }
 }
 
-/// Wraps [delegate] adding unmodified [CacheFriend.cacheKey] to the mix with data.
+/// Wraps [delegateFactory] adding unmodified [CacheFriend.cacheKey] to the mix with data.
 /// Validates that key on [get] and returns null if it is not equals original.
 /// Helps to make sure the data returned is not a result of clashed cache key.
 class AsyncCacheFriendDelegate<D extends Object, P extends CacheFriend> implements AsyncCacheDelegate<D, P> {
@@ -146,7 +151,7 @@ class _SyncFriendAdapter<D extends Object, P extends Object> implements SyncCach
   }
 
   /// Constructor
-  /// [delegate] Parent delegate
+  /// [delegateFactory] Parent delegate
   /// [params] Passed params
   /// [stringify] Params stringifying function
   const _SyncFriendAdapter(this._delegate, this._stringify);
@@ -187,7 +192,7 @@ class _AsyncFriendAdapter<D extends Object, P extends Object> implements AsyncCa
   }
 
   /// Constructor
-  /// [delegate] Parent delegate
+  /// [delegateFactory] Parent delegate
   /// [params] Passed params
   /// [stringify] Params stringifying function
   const _AsyncFriendAdapter(this._delegate, this._stringify);

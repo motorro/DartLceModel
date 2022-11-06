@@ -1,6 +1,8 @@
-import '../../dartlcemodel_cache.dart';
+import 'entity/entity.dart';
 
 /// Delegate that asynchronously performs caching operations
+/// [D] - data type to store
+/// [P] - params type
 abstract class AsyncCacheDelegate<D extends Object, P extends Object> {
   /// Returns data if cached
   /// [params] Caching key

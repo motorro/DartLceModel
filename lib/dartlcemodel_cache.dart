@@ -18,6 +18,8 @@ export 'src/cache/entity/entityValidatorFactory.dart' show EntityValidatorFactor
 export 'src/cache/entity/lifespan.dart' show Lifespan;
 export 'src/cache/entity/never.dart' show NeverValid;
 export 'src/cache/entity/simple.dart' show Simple;
+export 'src/cache/isolateCacheDelegate.dart' show IsolateCacheDelegate;
+export 'src/cache/isolateCacheDelegate.dart' show IsolateCacheDelegateExtension;
 export 'src/cache/memoryCacheDelegate.dart' show MemoryCacheDelegate;
 export 'src/cache/memoryCacheDelegate.dart' show MemoryDelegateCache;
 export 'src/cache/syncCacheDelegate.dart' show SyncCacheDelegate;

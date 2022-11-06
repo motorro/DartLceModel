@@ -6,7 +6,7 @@ import 'package:dartlcemodel/dartlcemodel_model.dart';
 import 'cacheServiceCommand.dart';
 
 /// Cache service implementation with [SyncCacheDelegate]
-/// [delegate] Delegate to perform concrete caching operations
+/// [delegateFactory] Delegate to perform concrete caching operations
 class SyncDelegateCacheService<D extends Object, P extends Object> implements CacheService<D, P> {
 
   /// Cache delegate
@@ -18,6 +18,8 @@ class SyncDelegateCacheService<D extends Object, P extends Object> implements Ca
   /// Service refresh stream
   late final Stream<CacheServiceCommand<P>> _refreshStream;
 
+  /// Constructor
+  /// [_delegate] - Delegate for data storage
   SyncDelegateCacheService(this._delegate) {
     _refreshController = StreamController();
     _refreshStream = _refreshController.stream.asBroadcastStream();

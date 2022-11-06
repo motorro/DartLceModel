@@ -1,6 +1,8 @@
 import '../../dartlcemodel_cache.dart';
 
 /// Delegate that synchronously performs caching operations
+/// [D] - data type to store
+/// [P] - params type
 abstract class SyncCacheDelegate<D extends Object, P extends Object> {
   /// Returns data if cached
   /// [params] Caching key
