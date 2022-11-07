@@ -12,14 +12,14 @@ void main() {
 
       expect(
           state3,
-          isA<Loading<int>>()
+          isA<LceLoading<int>>()
       );
       expect(
           state3.dataIsValid,
           isFalse
       );
       expect(
-          (state3 as Loading).type,
+          (state3 as LceLoading).type,
           equals(LoadingType.loading)
       );
     });
@@ -31,14 +31,14 @@ void main() {
 
       expect(
           state3,
-          isA<Loading<int>>()
+          isA<LceLoading<int>>()
       );
       expect(
           state3.dataIsValid,
           isFalse
       );
       expect(
-          (state3 as Loading).type,
+          (state3 as LceLoading).type,
           equals(LoadingType.loading)
       );
     });
@@ -51,7 +51,7 @@ void main() {
 
       expect(
           state3,
-          isA<Error<int>>()
+          isA<LceError<int>>()
       );
       expect(
           state3.dataIsValid,
@@ -66,7 +66,7 @@ void main() {
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<LceTerminated<int>>()
       );
     });
 
@@ -77,7 +77,7 @@ void main() {
 
       expect(
           state3,
-          isA<Loading<int>>()
+          isA<LceLoading<int>>()
       );
       expect(
           state3.dataIsValid,
@@ -88,7 +88,7 @@ void main() {
           equals(3)
       );
       expect(
-          (state3 as Loading).type,
+          (state3 as LceLoading).type,
           equals(LoadingType.refreshing)
       );
     });
@@ -100,7 +100,7 @@ void main() {
 
       expect(
           state3,
-          isA<Loading<int>>()
+          isA<LceLoading<int>>()
       );
       expect(
           state3.dataIsValid,
@@ -111,7 +111,7 @@ void main() {
           isNull
       );
       expect(
-          (state3 as Loading).type,
+          (state3 as LceLoading).type,
           equals(LoadingType.loading)
       );
     });
@@ -123,7 +123,7 @@ void main() {
 
       expect(
           state3,
-          isA<Content<int>>()
+          isA<LceContent<int>>()
       );
       expect(
           state3.dataIsValid,
@@ -143,7 +143,7 @@ void main() {
 
       expect(
           state3,
-          isA<Error<int>>()
+          isA<LceError<int>>()
       );
       expect(
           state3.dataIsValid,
@@ -154,7 +154,7 @@ void main() {
           equals(3)
       );
       expect(
-          (state3 as Error).error,
+          (state3 as LceError).error,
           error
       );
     });
@@ -166,7 +166,7 @@ void main() {
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<LceTerminated<int>>()
       );
     });
 
@@ -178,7 +178,7 @@ void main() {
 
       expect(
           state3,
-          isA<Error<int>>()
+          isA<LceError<int>>()
       );
       expect(
           state3.dataIsValid,
@@ -189,7 +189,7 @@ void main() {
           equals(3)
       );
       expect(
-          (state3 as Error).error,
+          (state3 as LceError).error,
           equals(error)
       );
     });
@@ -202,7 +202,7 @@ void main() {
 
       expect(
           state3,
-          isA<Error<int>>()
+          isA<LceError<int>>()
       );
       expect(
           state3.dataIsValid,
@@ -213,7 +213,7 @@ void main() {
           equals(3)
       );
       expect(
-          (state3 as Error).error,
+          (state3 as LceError).error,
           equals(error)
       );
     });
@@ -227,7 +227,7 @@ void main() {
 
       expect(
           state3,
-          isA<Error<int>>()
+          isA<LceError<int>>()
       );
       expect(
           state3.dataIsValid,
@@ -238,7 +238,7 @@ void main() {
           equals(3)
       );
       expect(
-          (state3 as Error).error,
+          (state3 as LceError).error,
           equals(error1)
       );
     });
@@ -251,7 +251,7 @@ void main() {
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<LceTerminated<int>>()
       );
     });
 
@@ -262,7 +262,7 @@ void main() {
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<LceTerminated<int>>()
       );
     });
 
@@ -273,7 +273,7 @@ void main() {
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<LceTerminated<int>>()
       );
     });
 
@@ -285,7 +285,7 @@ void main() {
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<LceTerminated<int>>()
       );
     });
 
@@ -296,7 +296,7 @@ void main() {
 
       expect(
           state3,
-          isA<Terminated<int>>()
+          isA<LceTerminated<int>>()
       );
     });
   });

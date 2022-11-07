@@ -4,7 +4,7 @@ part of './lcestate.dart';
 /// [data] is the current data if any
 /// [dataIsValid] Data validity at the time of emission
 /// [type] Loading type
-class Loading<DATA extends Object> extends LceState<DATA> {
+class LceLoading<DATA extends Object> extends LceState<DATA> {
   @override
   final DATA? data;
 
@@ -15,10 +15,10 @@ class Loading<DATA extends Object> extends LceState<DATA> {
   /// [data] is the current data if any
   /// [dataIsValid] Data validity at the time of emission
   /// [type] Loading type
-  const Loading(this.data, bool dataIsValid, [ this.type = LoadingType.loading ]) : super._internal(dataIsValid);
+  const LceLoading(this.data, bool dataIsValid, [ this.type = LoadingType.loading ]) : super._internal(dataIsValid);
 
-  Loading<DATA> copyWith({ DATA? data, bool? dataIsValid, LoadingType? type}) {
-    return Loading(
+  LceLoading<DATA> copyWith({ DATA? data, bool? dataIsValid, LoadingType? type}) {
+    return LceLoading(
         data ?? this.data,
         dataIsValid ?? this.dataIsValid,
         type ?? this.type
@@ -28,7 +28,7 @@ class Loading<DATA extends Object> extends LceState<DATA> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is Loading &&
+          other is LceLoading &&
               runtimeType == other.runtimeType &&
               data == other.data &&
               dataIsValid == other.dataIsValid &&
@@ -44,9 +44,9 @@ class Loading<DATA extends Object> extends LceState<DATA> {
 
   @override
   T when<T extends Object>({
-    required T Function(Loading<DATA> state) loading,
-    required T Function(Content<DATA> state) content,
-    required T Function(Error<DATA> state) error,
+    required T Function(LceLoading<DATA> state) loading,
+    required T Function(LceContent<DATA> state) content,
+    required T Function(LceError<DATA> state) error,
     T Function()? terminated
   }) {
     return loading(this);
@@ -54,9 +54,9 @@ class Loading<DATA extends Object> extends LceState<DATA> {
 
   @override
   T whenElse<T extends Object>({
-    T Function(Loading<DATA> state)? loading,
-    T Function(Content<DATA> state)? content,
-    T Function(Error<DATA> state)? error,
+    T Function(LceLoading<DATA> state)? loading,
+    T Function(LceContent<DATA> state)? content,
+    T Function(LceError<DATA> state)? error,
     T Function()? terminated,
     required T Function(LceState<DATA> state) onElse
   }) {
