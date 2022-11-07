@@ -22,7 +22,7 @@ class SyncDelegateCacheService<D extends Object, P extends Object> implements Ca
   /// [_delegate] - Delegate for data storage
   SyncDelegateCacheService(this._delegate) {
     _refreshController = StreamController();
-    _refreshStream = _refreshController.stream.asBroadcastStream();
+    _refreshStream = _refreshController.stream.asBroadcastStream(onCancel: (s) => s.cancel());
   }
 
   @override

@@ -22,7 +22,7 @@ class AsyncDelegateCacheService<D extends Object, P extends Object> implements C
   /// [_delegate] - Delegate for data storage
   AsyncDelegateCacheService(this._delegate) {
     _refreshController = StreamController();
-    _refreshStream = _refreshController.stream.asBroadcastStream();
+    _refreshStream = _refreshController.stream.asBroadcastStream(onCancel: (s) => s.cancel());
   }
 
   @override
