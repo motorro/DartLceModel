@@ -1,6 +1,7 @@
-import '../../../dartlcemodel_cache.dart';
 
-/// Interface to load an [com.motorro.rxlcemodel.cache.entity.Entity] from network
+import 'package:dartlcemodel/dartlcemodel_cache.dart';
+
+/// Interface to load an [Entity] from network
 /// [D] Data type
 /// [P] Params that identify data type
 abstract class NetService<D extends Object, P extends Object> {

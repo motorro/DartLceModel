@@ -12,14 +12,14 @@ import 'entity/entity.dart';
 /// [P] - params type
 class IsolateCacheDelegate<D extends Object, P extends Object> implements AsyncCacheDelegate<D, P> {
   /// IO delegate
-  final AsyncCacheDelegate<D, P> _delegateFactory;
+  final AsyncCacheDelegate<D, P> _delegate;
 
   SendPort? _sendPort;
   Isolate? _actor;
 
   /// Constructor
-  /// [_delegateFactory] Async delegate factory to be wrapped with [Isolate]
-  IsolateCacheDelegate(this._delegateFactory);
+  /// [_delegate] Async delegate to be wrapped with [Isolate]
+  IsolateCacheDelegate(this._delegate);
 
   /// Disposes internal state
   void dispose(){
@@ -29,7 +29,7 @@ class IsolateCacheDelegate<D extends Object, P extends Object> implements AsyncC
   }
 
   /// Runs a command and waits for response
-  Future<Result<T>> _run<T extends Object>(_Command<D, P> Function(SendPort) command) async {
+  Future<Result<T?>> _run<T>(_Command<D, P> Function(SendPort) command) async {
     if (null == _actor) await _createActor();
     final ReceivePort port = ReceivePort();
     _sendPort!.send(command(port.sendPort));
@@ -41,7 +41,7 @@ class IsolateCacheDelegate<D extends Object, P extends Object> implements AsyncC
     final receivePort = ReceivePort();
     _actor = await Isolate.spawn(
         _actorLogic<D, P>,
-        _IsolateInit(receivePort.sendPort, _delegateFactory)
+        _IsolateInit(receivePort.sendPort, _delegate)
     );
     _sendPort = await receivePort.first;
   }
@@ -51,7 +51,7 @@ class IsolateCacheDelegate<D extends Object, P extends Object> implements AsyncC
     final receivePort = ReceivePort();
     init.sender.send(receivePort.sendPort);
 
-    final delegate = init.delegateFactory;
+    final delegate = init.delegate;
 
     await for (final _Command<D, P> command in receivePort) {
       command.when(
@@ -109,9 +109,9 @@ extension IsolateCacheDelegateExtension<D extends Object, P extends Object> on A
 /// Initializes actor
 class _IsolateInit<D extends Object, P extends Object> {
   final SendPort sender;
-  final AsyncCacheDelegate<D, P> delegateFactory;
+  final AsyncCacheDelegate<D, P> delegate;
 
-  const _IsolateInit(this.sender, this.delegateFactory);
+  const _IsolateInit(this.sender, this.delegate);
 }
 
 /// Actor command - sent to isolate

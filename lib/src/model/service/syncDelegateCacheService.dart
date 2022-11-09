@@ -6,7 +6,7 @@ import 'package:dartlcemodel/dartlcemodel_model.dart';
 import 'cacheServiceCommand.dart';
 
 /// Cache service implementation with [SyncCacheDelegate]
-/// [delegateFactory] Delegate to perform concrete caching operations
+/// [delegate] Delegate to perform concrete caching operations
 class SyncDelegateCacheService<D extends Object, P extends Object> implements CacheService<D, P> {
 
   /// Cache delegate

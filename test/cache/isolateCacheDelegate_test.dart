@@ -1,14 +1,13 @@
 import 'dart:io';
 
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
-import 'package:dartlcemodel/src/cache/isolateCacheDelegate.dart';
 import 'package:test/test.dart';
 
 void main() {
   final String params = 'params';
   final Entity<String> entity = Entity.create('data', AlwaysValid.instance);
 
-  group('Sync friend delegate', () {
+  group('Isolate delegate', () {
     test('returns null when nothing cached', () {
       final isolateDelegate = IsolateCacheDelegate(_TestDelegate());
       expect(

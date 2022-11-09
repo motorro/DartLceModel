@@ -15,7 +15,7 @@ class _StringAdapter<D extends Object, P extends Object> implements SyncCacheDel
   final String Function(P params) _stringify;
 
   /// Constructor
-  /// [delegateFactory] Parent delegate
+  /// [delegate] Parent delegate
   /// [params] Passed params
   /// [stringify] Params stringifying function
   const _StringAdapter(this._delegate, this._stringify);

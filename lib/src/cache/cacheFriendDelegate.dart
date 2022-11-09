@@ -35,7 +35,7 @@ class DataWithCacheKey<D extends Object> {
   }
 }
 
-/// Wraps [delegateFactory] adding unmodified [CacheFriend.cacheKey] to the mix with data.
+/// Wraps [delegate] adding unmodified [CacheFriend.cacheKey] to the mix with data.
 /// Validates that key on [get] and returns null if it is not equals original.
 /// Helps to make sure the data returned is not a result of clashed cache key.
 class SyncCacheFriendDelegate<D extends Object, P extends CacheFriend> implements SyncCacheDelegate<D, P> {
@@ -79,7 +79,7 @@ class SyncCacheFriendDelegate<D extends Object, P extends CacheFriend> implement
   }
 }
 
-/// Wraps [delegateFactory] adding unmodified [CacheFriend.cacheKey] to the mix with data.
+/// Wraps [delegate] adding unmodified [CacheFriend.cacheKey] to the mix with data.
 /// Validates that key on [get] and returns null if it is not equals original.
 /// Helps to make sure the data returned is not a result of clashed cache key.
 class AsyncCacheFriendDelegate<D extends Object, P extends CacheFriend> implements AsyncCacheDelegate<D, P> {
@@ -151,7 +151,7 @@ class _SyncFriendAdapter<D extends Object, P extends Object> implements SyncCach
   }
 
   /// Constructor
-  /// [delegateFactory] Parent delegate
+  /// [delegate] Parent delegate
   /// [params] Passed params
   /// [stringify] Params stringifying function
   const _SyncFriendAdapter(this._delegate, this._stringify);
@@ -192,7 +192,7 @@ class _AsyncFriendAdapter<D extends Object, P extends Object> implements AsyncCa
   }
 
   /// Constructor
-  /// [delegateFactory] Parent delegate
+  /// [delegate] Parent delegate
   /// [params] Passed params
   /// [stringify] Params stringifying function
   const _AsyncFriendAdapter(this._delegate, this._stringify);
