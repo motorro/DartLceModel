@@ -22,17 +22,41 @@ class AsyncDelegateCacheService<D extends Object, P extends Object> implements C
   /// [_delegate] - Delegate for data storage
   AsyncDelegateCacheService(this._delegate) {
     _refreshController = StreamController();
-    _refreshStream = _refreshController.stream.asBroadcastStream(onCancel: (s) => s.cancel());
+    _refreshStream = _refreshController.stream.asBroadcastStream();
   }
 
   @override
-  Stream<Entity<D>?> getData(P params) async* {
-    yield await _delegate.get(params);
-    await for (final command in _refreshStream) {
-      if (command.isForMe(params)) {
-        yield await _delegate.get(params);
+  Stream<Entity<D>?> getData(P params) {
+    final controller = StreamController<Entity<D>?>();
+    StreamSubscription<CacheServiceCommand<P>>? updates;
+
+    Future<void> tryAdd(Future<Entity<D>?> Function() producer) async {
+      try {
+        controller.add(await producer());
+      } catch (e) {
+        controller.addError(e);
       }
     }
+
+    controller.onListen = () async {
+      await tryAdd(() => _delegate.get(params));
+      updates = _refreshStream.listen((command) async {
+        if (command.isForMe(params)) {
+          await tryAdd(() => _delegate.get(params));
+        }
+      });
+    };
+    controller.onPause = () {
+      updates?.pause();
+    };
+    controller.onResume = () {
+      updates?.resume();
+    };
+    controller.onCancel = () async {
+      await updates?.cancel();
+    };
+
+    return controller.stream;
   }
 
   @override

@@ -5,8 +5,21 @@ import '../../../dartlcemodel_model.dart';
 /// [P] Params that identify data type
 abstract class ServiceSet<D extends Object, P extends Object> {
   /// Net service
-  abstract NetService<D, P> net;
+  abstract final NetService<D, P> net;
 
   /// Cache service
-  abstract CacheService<D, P> cache;
+  abstract final CacheService<D, P> cache;
+
+  /// Creates a service set given [cache] and [net] services
+  const factory ServiceSet(CacheService<D, P> cache, NetService<D, P> net) = _ServiceSetImpl;
+}
+
+class _ServiceSetImpl<D extends Object, P extends Object> implements ServiceSet<D, P> {
+  @override
+  final CacheService<D, P> cache;
+
+  @override
+  final NetService<D, P> net;
+
+  const _ServiceSetImpl(this.cache, this.net);
 }

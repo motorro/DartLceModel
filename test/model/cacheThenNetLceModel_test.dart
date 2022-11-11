@@ -36,7 +36,7 @@ void main() {
     when(serviceSet.cache).thenReturn(cache);
     when(serviceSet.net).thenReturn(net);
 
-    return CacheThenNetLceModel(params, serviceSet, initial ?? Stream.empty());
+    return CacheThenNetLceModel(params, serviceSet, startWith: initial ?? Stream.empty());
   }
 
   group('CacheThenNetLceModel', () {

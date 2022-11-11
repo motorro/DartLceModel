@@ -22,9 +22,9 @@ abstract class LceModel<DATA extends Object, PARAMS extends Object> implements L
   const factory LceModel.cacheThenNet(
     PARAMS params,
     ServiceSet<DATA, PARAMS> serviceSet,
-    [
-      Stream<LceState<DATA>>? startWith,
-      Logger? logger
-    ]
+      {
+        Stream<LceState<DATA>>? startWith,
+        Logger? logger
+      }
   ) = CacheThenNetLceModel;
 }

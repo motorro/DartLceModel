@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 
 import './asyncDelegateCacheService.dart';
-import './syncDelegateCacheService.dart';
 
 /// Interface to cache an [Entity] locally
 /// Cache should notify subscribers that data has been updated through [getData] channel
@@ -13,7 +12,9 @@ abstract class CacheService<D extends Object, P extends Object> {
 
   /// Creates a [SyncCacheDelegate] cache service
   /// [delegate] Delegate that synchronously performs caching actions
-  factory CacheService.withSyncDelegate(SyncCacheDelegate<D, P> delegate) = SyncDelegateCacheService;
+  factory CacheService.withSyncDelegate(SyncCacheDelegate<D, P> delegate) {
+    return AsyncDelegateCacheService(AsyncCacheDelegate(delegate));
+  }
 
   /// Creates a [AsyncCacheDelegate] cache service
   /// [delegate] Delegate that synchronously performs caching actions

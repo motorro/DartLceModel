@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 import 'package:dartlcemodel/dartlcemodel_lce.dart';
 import 'package:dartlcemodel/dartlcemodel_model.dart';
@@ -26,32 +28,31 @@ class CacheThenNetLceModel<DATA extends Object, PARAMS extends Object> implement
   const CacheThenNetLceModel(
       this.params,
       this._serviceSet,
-      [
-        this._startWith,
-        this._logger
-      ]
-  );
+      {
+        Stream<LceState<DATA>>? startWith,
+        Logger? logger
+      }
+  ) : _startWith = startWith, _logger = logger;
 
-  /// Checks data for if valid.
-  /// Runs data update if required
-  Stream<LceState<DATA>> _processData(Entity<DATA>? entity) async* {
+  /// Checks data from cache and launches updates if necessary
+  Future<void> _processData(Entity<DATA>? entity, void Function(LceState<DATA> state) sink) async {
     _log("Processing data from cache...");
     final data = entity?.data;
     final dataIsValid = true == entity?.isValid();
     if (null != data && dataIsValid) {
       _log("Cache emitted valid data - CONTENT");
-      yield LceState.content(data, dataIsValid);
+      sink(LceState.content(data, dataIsValid));
     } else {
       _log("No valid data or data is stall - LOADING");
-      yield LceState.loading(data, dataIsValid, null == data ? LoadingType.loading : LoadingType.refreshing);
+      sink(LceState.loading(data, dataIsValid, null == data ? LoadingType.loading : LoadingType.refreshing));
       try {
         await _getAndSave();
       } on Exception catch(e) {
         _log("Error getting data from network - ERROR: ${e.toString()}", LogLevel.warning);
-        yield LceState.error(data, dataIsValid, e);
+        sink(LceState.error(data, dataIsValid, e));
       } catch (e) {
         _log("Error getting data from network - ERROR: ${e.toString()}", LogLevel.warning);
-        yield LceState.error(data, dataIsValid, Exception(e.toString));
+        sink(LceState.error(data, dataIsValid, Exception(e.toString)));
       }
     }
   }
@@ -64,10 +65,34 @@ class CacheThenNetLceModel<DATA extends Object, PARAMS extends Object> implement
   }
 
   @override
-  Stream<LceState<DATA>> get state async* {
+  Stream<LceState<DATA>> get state {
     _log("Subscribing state...");
-    yield* _startWith ?? Stream.empty();
-    yield* _serviceSet.cache.getData(params).asyncExpand(_processData);
+
+    late StreamSubscription<Entity<DATA>? > cacheSubscription;
+    final StreamController<LceState<DATA>> controller = StreamController();
+
+    controller.onListen = () async {
+      final startWith = _startWith;
+      if (null != startWith) {
+        await controller.addStream(startWith);
+      }
+      cacheSubscription = _serviceSet.cache.getData(params).listen(
+        (event) async { await _processData(event, (state) { controller.add(state); } ); },
+        onError: (error) async { controller.addError(error); },
+        onDone: () { controller.close(); }
+      );
+    };
+    controller.onPause = () {
+      cacheSubscription.pause();
+    };
+    controller.onResume = () {
+      cacheSubscription.resume();
+    };
+    controller.onCancel = () async {
+      await cacheSubscription.cancel();
+    };
+
+    return controller.stream;
   }
 
   @override
