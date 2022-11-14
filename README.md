@@ -1,4 +1,4 @@
-# RxLceModel
+# DartLceModel
 
 A reactive data loading for Dart platform to load data and report an
 operation state (`Loading`/`Content`/`Error`).
