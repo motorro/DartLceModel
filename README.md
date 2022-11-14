@@ -1,4 +1,4 @@
-# DartLceModel  [![pub package](https://img.shields.io/pub/v/dartlcemodel.svg)](https://pub.dev/packages/dartlcemodel)
+# DartLceModel [![Check](https://github.com/motorro/DartLceModel/actions/workflows/check.yml/badge.svg?branch=master)](https://github.com/motorro/DartLceModel/actions/workflows/check.yml) [![pub package](https://img.shields.io/pub/v/dartlcemodel.svg)](https://pub.dev/packages/dartlcemodel)
 
 A reactive data loading for Dart platform to load data and report an
 operation state (`Loading`/`Content`/`Error`).
