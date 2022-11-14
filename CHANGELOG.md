@@ -1,3 +1,3 @@
-## 1.0.0
+## 0.1.0
 
-- Initial version.
+- Initial core port from [RxLceModel](https://github.com/motorro/RxLceModel).
