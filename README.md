@@ -1,4 +1,4 @@
-# DartLceModel
+# DartLceModel  [![pub package](https://img.shields.io/pub/v/dartlcemodel.svg)](https://pub.dev/packages/dartlcemodel)
 
 A reactive data loading for Dart platform to load data and report an
 operation state (`Loading`/`Content`/`Error`).
@@ -40,7 +40,7 @@ The project contains an example app that:
 
 <!-- tocstop -->
 
-## Setting up the dependency [![pub package](https://img.shields.io/pub/v/dartlcemodel.svg)](https://pub.dev/packages/dartlcemodel):
+## Setting up the dependency:
 
 ```shell
 $ dart pub add dartlcemodel
