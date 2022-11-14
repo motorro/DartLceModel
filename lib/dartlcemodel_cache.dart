@@ -10,6 +10,7 @@ export 'src/cache/cacheManager.dart' show CacheManager;
 export 'src/cache/entity/always.dart' show AlwaysValid;
 export 'src/cache/entity/entity.dart' show Entity;
 export 'src/cache/entity/entity.dart' show EntityImpl;
+export 'src/cache/entity/entity.dart' show EntityExtension;
 export 'src/cache/entity/entityValidator.dart' show EntityValidator;
 export 'src/cache/entity/entityValidator.dart' show EntityValidator;
 export 'src/cache/entity/entityValidator.dart' show EntityValidatorDeserializer;

@@ -25,7 +25,7 @@ void main() {
   // - a service to get data from server. `isolated()` runs networking and parsing in [Isolate]
   serviceSet = ServiceSet(
       CacheService<List<Repository>, String>.withSyncDelegate(MemoryCacheDelegate.map()),
-      RepositoryNetService()//.isolated()
+      RepositoryNetService().isolated()
   );
 
   runApp(const MyApp());

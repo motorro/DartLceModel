@@ -20,6 +20,6 @@ class RepositoryNetService implements NetService<List<Repository>, String> {
         .where((item) => null != item)
         .map<Repository>((source) => Repository.fromJson(source))
         .toList(growable: false);
-    return Entity.create(data, _validatorFactory.create());
+    return data.toEntity(_validatorFactory.create());
   }
 }

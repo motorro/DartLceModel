@@ -76,3 +76,9 @@ class EntityImpl<T extends Object> with EntityValidatorMixin implements Entity<T
   }
 }
 
+/// Entity extensions
+extension EntityExtension<D extends Object> on D {
+  /// Creates entity from this value, validated by [validator]
+  Entity<D> toEntity(EntityValidator validator) => Entity.create(this, validator);
+}
+
