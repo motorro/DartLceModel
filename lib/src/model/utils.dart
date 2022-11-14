@@ -116,11 +116,11 @@ extension LceUseCaseExtension<DATA extends Object> on LceUseCase<DATA> {
   /// [mapper] Data mapper
   LceUseCase<DATA_2> map<DATA_2 extends Object>(DATA_2 Function(DATA data) mapper) => _LceUseCaseMapper<DATA, DATA_2>(this, mapper);
 
-  /// Takes the [LceUseCase.state] of model that is being refreshed each time [refreshStream] emits a value
+  /// Takes the [LceUseCase.state] of model that is being refreshed each time [refresh] emits a value
   /// Useful when you create a model as a result of mapping of some input (params for example) and the
   /// [LceUseCase.refresh] property becomes invisible for the outside world
   /// [DATA] Source model data type
-  /// [refreshStream] Whenever this stream emits a value, the model is refreshed
+  /// [refresh] Whenever this stream emits a value, the model is refreshed
   Stream<LceState<DATA>> withRefresh(Stream<dynamic> refresh) {
     final controller = StreamController<LceState<DATA>>(sync: true);
     late StreamSubscription<LceState<DATA>> stateSubscription;

@@ -15,7 +15,7 @@ class Simple extends EntityValidator {
 
   /// A simple validator which state is defined on creation
   /// May be used to fix the [isValid] state of dynamic validator such as [Lifespan]
-  /// [valid] Validity state
+  /// [_valid] Validity state
   const Simple(this._valid);
 
   @override

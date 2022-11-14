@@ -2,7 +2,7 @@ import 'package:dartlcemodel/dartlcemodel_lce.dart';
 
 /// [LceState] extensions
 extension LceStateUtils<DATA_1 extends Object> on LceState<DATA_1> {
-  /// Runs transformation [block] catching any error and wrapping it to [LceState.Error]:
+  /// Runs transformation [block] catching any error and wrapping it to [LceError]:
   /// - The output data will be null
   /// - The data will be invalid
   LceState<DATA_2> catchToLce<DATA_2 extends Object>(LceState<DATA_2> Function (LceState<DATA_1>) block) {
@@ -60,6 +60,8 @@ extension LceStateUtils<DATA_1 extends Object> on LceState<DATA_1> {
 
   /// Combines two Lce states.
   /// Here is the result state matrix
+  ///
+  ///
   /// | Receiver   | other      | Result     |
   /// |------------|------------|------------|
   /// | Loading    | Loading    | Loading    |
@@ -78,6 +80,7 @@ extension LceStateUtils<DATA_1 extends Object> on LceState<DATA_1> {
   /// | Terminated | Content    | Terminated |
   /// | Terminated | Error      | Terminated |
   /// | Terminated | Terminated | Terminated |
+  ///
   ///
   /// - Receiver - An Lce state that has a priority in final state resolution
   /// - [other] Other state to combine with

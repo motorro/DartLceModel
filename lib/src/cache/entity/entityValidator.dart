@@ -29,7 +29,7 @@ abstract class EntityValidator {
   int get hashCode => isValid().hashCode;
 }
 
-/// Delegates [EntityValidator] to [_validator] provided by host class
+/// Delegates [EntityValidator] to [validator] provided by host class
 mixin EntityValidatorMixin implements EntityValidator {
 
   EntityValidator get validator;
@@ -57,12 +57,12 @@ abstract class EntityValidatorDeserializer {
 
   /// Deserializes validator from string if string is recognized
   /// [serialized] - Serialized validator
-  /// [Deserialized] - validator or null if not recognized
+  /// Returns validator or null if not recognized
   EntityValidator? deserialize(String serialized);
 
   /// Deserializes an immutable snapshot of validator that does not change [EntityValidator.isValid] with time
   /// [serialized] Serialized validator
-  /// [Deserialized] validator or null if not recognized
+  /// Returns validator or null if not recognized
   EntityValidator? deserializeSnapshot(String serialized) {
     return deserialize(serialized)?.createSnapshot();
   }
