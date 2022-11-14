@@ -40,8 +40,8 @@ The project contains an example app that:
 
 <!-- tocstop -->
 
-## Setting up the dependency
-Basic module [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.motorro.rxlcemodel/base/badge.png)](https://repo1.maven.org/maven2/com/motorro/rxlcemodel/base/):
+## Setting up the dependency [![pub package](https://img.shields.io/pub/v/dartlcemodel.svg)](https://pub.dev/packages/dartlcemodel):
+
 ```shell
 $ dart pub add dartlcemodel
 ```
