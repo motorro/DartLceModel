@@ -8,7 +8,7 @@ import '../utils.dart';
 @GenerateNiceMocks([
   MockSpec<Clock>()
 ])
-import 'entityValidatorFactory_test.mocks.dart';
+import 'entity_validator_factory_test.mocks.dart';
 
 void main() {
   late Clock clock;

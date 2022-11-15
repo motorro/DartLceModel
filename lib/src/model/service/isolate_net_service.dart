@@ -4,7 +4,7 @@ import 'dart:isolate';
 import 'package:dartlcemodel/dartlcemodel_utils.dart';
 import 'package:dartlcemodel/src/cache/entity/entity.dart';
 
-import './netService.dart';
+import './net_service.dart';
 
 class IsolateNetService<D extends Object, P extends Object> implements NetService<D, P> {
   /// Delegate service

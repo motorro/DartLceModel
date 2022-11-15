@@ -8,7 +8,7 @@ import '../utils.dart';
 @GenerateNiceMocks([
   MockSpec<Clock>()
 ])
-import 'memoryCacheDelegate_test.mocks.dart';
+import 'memory_cache_delegate_test.mocks.dart';
 
 void main() {
   late Clock clock;

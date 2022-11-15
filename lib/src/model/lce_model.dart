@@ -2,7 +2,7 @@ import 'package:dartlcemodel/dartlcemodel_lce.dart';
 import 'package:dartlcemodel/dartlcemodel_model.dart';
 import 'package:dartlcemodel/dartlcemodel_utils.dart';
 
-import './cacheThenNetLceModel.dart';
+import './cache_then_net_lce_model.dart';
 
 /// A model interface to load data and transmit it to subscribers along with loading operation state
 /// The model is bound with [params] that identify the data

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 import 'package:dartlcemodel/dartlcemodel_model.dart';
 
-import 'cacheServiceCommand.dart';
+import 'cache_service_command.dart';
 
 /// Cache service implementation with [AsyncCacheDelegate]
 /// [delegate] Delegate to perform concrete caching operations

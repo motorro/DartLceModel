@@ -1,4 +1,4 @@
-part of './lcestate.dart';
+part of './lce_state.dart';
 
 /// [DATA] load error. May contain some [data] if cached
 /// [data] State data

@@ -1,9 +1,9 @@
 
 import 'package:dartlcemodel/src/cache/entity/entity.dart';
-import 'package:dartlcemodel/src/cache/syncCacheDelegate.dart';
+import 'package:dartlcemodel/src/cache/sync_cache_delegate.dart';
 
-import 'asyncCacheDelegate.dart';
-import 'cacheFriend.dart';
+import 'async_cache_delegate.dart';
+import 'cache_friend.dart';
 
 /// Data combined with full cached key to validate we get exactly what we are looking for
 /// For example, DiskLruCache has strict requirements and limited length of a cache key and

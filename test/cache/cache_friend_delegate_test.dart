@@ -7,7 +7,7 @@ import 'package:test/test.dart';
   MockSpec<SyncCacheDelegate>(),
   MockSpec<AsyncCacheDelegate>()
 ])
-import 'cacheFriendDelegate_test.mocks.dart';
+import 'cache_friend_delegate_test.mocks.dart';
 
 void main() {
   final CacheFriend params = CacheFriend.create('params1');
@@ -88,8 +88,8 @@ void main() {
     });
 
     test('returns null if params don\'t match', () {
-      when(cacheDelegate.get(params)).thenAnswer( (_) async {
-        entity.map((_) => DataWithCacheKey('data', 'params2'));
+      when(cacheDelegate.get(params)).thenAnswer((_) async {
+        return entity.map((_) => DataWithCacheKey('data', 'params2'));
       });
       expect(friendDelegate.get(params), completion(isNull));
     });

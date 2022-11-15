@@ -1,4 +1,4 @@
-import 'entityValidator.dart';
+import 'entity_validator.dart';
 
 // Serialized [Never]
 const _serializedNever = "Never!";

@@ -1,4 +1,4 @@
-part of './lcestate.dart';
+part of './lce_state.dart';
 
 /// [DATA] is loaded
 /// [data] State data

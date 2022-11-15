@@ -5,3 +5,7 @@
 ## 0.1.1
 
 - Documentation update.
+
+## 0.1.2
+
+- Dart conventions and analysis fixes

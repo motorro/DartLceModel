@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 import 'package:dartlcemodel/dartlcemodel_model.dart';
-import 'package:dartlcemodel/src/model/service/asyncDelegateCacheService.dart';
+import 'package:dartlcemodel/src/model/service/async_delegate_cache_service.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -12,7 +12,7 @@ import '../utils.dart';
 @GenerateNiceMocks([
   MockSpec<AsyncCacheDelegate<String, String>>()
 ])
-import 'asyncDelegateCacheService_test.mocks.dart';
+import 'async_delegate_cache_service_test.mocks.dart';
 
 
 void main() {

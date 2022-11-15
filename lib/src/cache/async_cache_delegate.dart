@@ -1,7 +1,5 @@
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 
-import 'entity/entity.dart';
-
 /// Delegate that asynchronously performs caching operations
 /// [D] - data type to store
 /// [P] - params type

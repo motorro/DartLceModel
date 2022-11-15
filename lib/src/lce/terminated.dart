@@ -1,4 +1,4 @@
-part of './lcestate.dart';
+part of './lce_state.dart';
 
 /// A special state that may be used to terminate state emission in cases we always need a latest state to proceed
 /// For example we have a view that subscribes to [LceState] for a resource identified with some PARAMS.
@@ -40,7 +40,7 @@ class LceTerminated<DATA extends Object> extends LceState<DATA> {
   }) {
     if (null == terminated) {
       throw UnimplementedError('Unexpected termination. Terminated handler not implemented');
-    };
+    }
     return terminated();
   }
 

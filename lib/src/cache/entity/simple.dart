@@ -1,4 +1,4 @@
-import 'entityValidator.dart';
+import 'entity_validator.dart';
 
 /// A simple validator which state is defined on creation
 /// May be used to fix the [isValid] state of dynamic validator such as [Lifespan]

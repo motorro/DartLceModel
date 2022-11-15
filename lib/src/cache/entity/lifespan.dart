@@ -1,5 +1,5 @@
 import '../../../dartlcemodel_utils.dart';
-import 'entityValidator.dart';
+import 'entity_validator.dart';
 
 /// Uses creation time and TTL to validate
 class Lifespan extends EntityValidator {

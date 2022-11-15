@@ -3,7 +3,7 @@ import 'dart:isolate';
 
 import 'package:dartlcemodel/dartlcemodel_utils.dart';
 
-import 'asyncCacheDelegate.dart';
+import 'async_cache_delegate.dart';
 import 'entity/entity.dart';
 
 

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 
-import './asyncDelegateCacheService.dart';
+import './async_delegate_cache_service.dart';
 
 /// Interface to cache an [Entity] locally
 /// Cache should notify subscribers that data has been updated through [getData] channel

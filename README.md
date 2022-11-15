@@ -52,7 +52,7 @@ flow of immutable state-objects. Each of them should contain the whole set of da
 and display according to the business requirement. The most commonly used information besides the data itself is a state
 of data-loading pipeline.
 
-![LceState class diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/lce_state.puml)
+![LceState class diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/lce_state.puml)
 
 Each `LceState<DATA, PARAMS>` subclass represents a data-loading phase and contains the following data:
 *  `DATA? data` - Loaded data
@@ -79,7 +79,7 @@ enum LoadingType {
 * `Terminated` - a special state to indicate that resource identified by `params` is not available anymore. 
 
 ## LceModel
-`LceState<DATA, PARAMS>` in this library is being produced by the simple use-case [interface](lib/src/model/lceUseCase.dart):
+`LceState<DATA, PARAMS>` in this library is being produced by the simple use-case [interface](lib/src/model/lce_use_case.dart):
 ```dart
 /// Base LCE use-case with [state] and [refresh]
 /// [DATA] Data type of data being loaded
@@ -97,7 +97,7 @@ The use-case contains the following properties:
 *   `state` - the `Stream` that emits `LceState`
 *   `refresh` - the `Future` to perform data refresh
   
-The direct extension of the use-case is the [LceModel](lib/src/model/lceModel.dart) that binds the expected data with 
+The direct extension of the use-case is the [LceModel](lib/src/model/lce_model.dart) that binds the expected data with 
 the data identifying `PARAMS`:
 ```dart
 /// A model interface to load data and transmit it to subscribers along with loading operation state
@@ -126,11 +126,11 @@ Stream<LceState<FruitData>> state = params.asyncExpand((params) => createModel(p
 As you may guess from its name this kind of model tries to get cached data first and then loads data from network if
 nothing is found or the cached data is stalled. Here is the sequence diagram of data loading using this type of model:
 
-![CacheThenNet loading sequence](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/loading.puml)
+![CacheThenNet loading sequence](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/loading.puml)
 
-The model creates a data stream for given `PARAMS` in a [cache-service](lib/src/model/service/cacheService.dart)
+The model creates a data stream for given `PARAMS` in a [cache-service](lib/src/model/service/cache_service.dart)
 and transmits it to subscriber. If cache does not contain any data or data is not valid (more on validation later) the
-model subscribes a [net-service](lib/src/model/service/netService.dart) to download data from network and saves it 
+model subscribes a [net-service](lib/src/model/service/net_service.dart) to download data from network and saves it 
 to the cache for a later use.
 
 It is worth noting that `cache` and `net` here is just a common use-case of data-sources: locally stored  data (`cache`)
@@ -152,13 +152,13 @@ final useCase = LceModel.cacheThenNet(
 ## Getting and caching data
 As already mentioned above caching model uses two services to get data from network and to store it locally.
 
-*   [NetService](lib/src/model/service/netService.dart) - loads data from network.
-*   [CacheService](lib/src/model/service/cacheService.dart) - saves data locally.
+*   [NetService](lib/src/model/service/net_service.dart) - loads data from network.
+*   [CacheService](lib/src/model/service/cache_service.dart) - saves data locally.
 
 Caching data always brings up a problem of cache updates and invalidation. Be it a caching policy of your backend team
 or some internal logic of your application the data validity evaluation may be easily implemented:
 
-![Entity and validation](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/entity.puml)
+![Entity and validation](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/entity.puml)
 
 The `NetService` retrieved data and packages it to [Entity](lib/src/cache/entity/entity.dart)
 wrapper - effectively the data itself and some `EntityValidator` to provide information when data expires.
@@ -203,7 +203,7 @@ To create a `LifeSpan` validator, there is a helper-factory that takes a single 
 final validatorFactory = EntityValidatorFactory.lifespan(5000);
 ``` 
 
-The `LifespanValidatorFactory` is an implementation of [EntityValidatorFactory](lib/src/cache/entity/entityValidatorFactory.dart)
+The `LifespanValidatorFactory` is an implementation of [EntityValidatorFactory](lib/src/cache/entity/entity_validator_factory.dart)
 that you may implement in case you need your own custom validator.
 
 ## Displaying 'invalid' data and cache fall-back
@@ -212,7 +212,7 @@ in case network is not available and to keep working. This is an easy way to cre
 complex state synchronization between the app and server is not required. With 'cache-then-net' model you get the cache
 fall-back already implemented. Here is what you get when network connection is not available:
 
-![Cache fallback](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/cache_fallback_on_error.puml)
+![Cache fallback](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/cache_fallback_on_error.puml)
 
 When there is no cached data available you just get `null` for `data` property in emitted `LceState.Error`.
 
@@ -222,10 +222,10 @@ happens in another part. Reloading a list of messages in a chat application when
 There are different ways of doing this - event-buses, Stream-subjects, you name it.
 With reactive cache-service the library provides, such an invalidation is made in a simple and clean way:
 
-![Cache invalidation](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/cache_invalidation.puml)
+![Cache invalidation](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/cache_invalidation.puml)
 
 If the push-message brings a payload that is enough to display data change you could simply save the new data to cash
-with `save` method or delete it with `delete` method of [CacheService](lib/src/model/service/cacheService.dart) interface:
+with `save` method or delete it with `delete` method of [CacheService](lib/src/model/service/cache_service.dart) interface:
 
 The sample application demonstrates cache invalidation with a click or `Refresh` button. Here is how the invalidation is
 implemented:
@@ -266,18 +266,18 @@ In this case you may write an SQL delegate for sync-delegate service (see below)
 When you get/put the whole entity the solution works. But as soon as you start to update entity parts
 you need some way to notify subscribers of data change.
 
-![Cache refetch](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/cache_refetch.puml)
+![Cache refetch](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/cache_refetch.puml)
 
-[CacheService](lib/src/model/service/cacheService.dart)
+[CacheService](lib/src/model/service/cache_service.dart)
 has two methods that when called makes it to refetch data and update its active clients:
 - `Future<void> refetch(P params): Completable` - makes cache service to refetch data for `params` and update corresponding clients
 - `Future<void> refetchAll()` - makes cache service to refetch data for all subscribers
 
 ## Cache service implementation
-While you can implement any cache-service you like the library comes with simple [AsyncDelegateCacheService](lib/src/cache/asyncCacheDelegate.dart)
-and [SyncDelegateCacheService](lib/src/cache/syncCacheDelegate.dart) which use the following async/sync delegates for data IO:
+While you can implement any cache-service you like the library comes with simple [AsyncDelegateCacheService](lib/src/cache/async_cache_delegate.dart)
+and [SyncDelegateCacheService](lib/src/cache/sync_cache_delegate.dart) which use the following async/sync delegates for data IO:
 
-![Cache delegate](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/cache_delegate.puml)
+![Cache delegate](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/motorro/DartLceModel/master/readme_files/cache_delegate.puml)
 
 The interface is self-explanatory and does all the IO for `CacheService` in sync/async way. 
 

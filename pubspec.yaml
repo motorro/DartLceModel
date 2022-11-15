@@ -1,6 +1,6 @@
 name: dartlcemodel
 description: A Dart library for data loading with reactive cache and loading state.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/motorro/DartLceModel
 repository: https://github.com/motorro/DartLceModel.git
 issue_tracker: https://github.com/motorro/DartLceModel

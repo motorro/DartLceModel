@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 import 'package:dartlcemodel/dartlcemodel_model.dart';
-import 'package:dartlcemodel/src/model/service/isolateNetService.dart';
 import 'package:test/test.dart';
 
 void main() {

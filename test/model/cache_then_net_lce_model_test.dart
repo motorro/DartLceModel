@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dartlcemodel/dartlcemodel_cache.dart';
 import 'package:dartlcemodel/dartlcemodel_lce.dart';
 import 'package:dartlcemodel/dartlcemodel_model.dart';
-import 'package:dartlcemodel/src/model/cacheThenNetLceModel.dart';
+import 'package:dartlcemodel/src/model/cache_then_net_lce_model.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -13,7 +13,7 @@ import 'package:test/test.dart';
   MockSpec<CacheService<int, String>>(),
   MockSpec<NetService<int, String>>()
 ])
-import 'cacheThenNetLceModel_test.mocks.dart';
+import 'cache_then_net_lce_model_test.mocks.dart';
 
 void main() {
   final params = 'params';
